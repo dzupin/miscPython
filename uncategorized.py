@@ -40,5 +40,5 @@ another_data_source = {
 }
 table.insert(another_data_source)
 sources = db['data_sources'].all()
-print sources
-print sources.row_type
+print (sources)
+print (sources.row_type)
