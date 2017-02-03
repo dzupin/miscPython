@@ -1,6 +1,11 @@
 import subprocess
 ####import subprocess32 as subprocess
 
+#Windows Platform
+cmdTestRoutineWin="cd  C:\CA\AionBRE\examples\Associate && dir && respawn associate.app && echo last command"
+subprocess.call(cmdTestRoutineWin,shell=True)
+exit()
+
 # Setup your execution command
 goToInstallDir="cd /opt/CA/AionBRE;"
 initializeEnvironment=". ./aion.sh;"
