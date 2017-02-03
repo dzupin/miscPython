@@ -7,7 +7,23 @@ import subprocess
 #subprocess.call("pwd >> mylogfile.log", shell=True)
 
 ##### initialize Aion ###############
-cmdTestRoutine="cd /opt/CA/AionBRE;. ./aion.sh;cd /opt/CA/AionBRE/examples/Associate; rm /TEMP/Out.log; rm -rf /opt/CA/AionBRE/examples/Associate/associate.bin; respawn associate2.app >> /TEMP/Out.log  2>&1;reexec associate >> /TEMP/Out.log 2>&1 ;cd associate.bin;./_associate >> /TEMP/Out.log 2>&1 "
+#cmdTestRoutine="cd /opt/CA/AionBRE;. ./aion.sh;cd /opt/CA/AionBRE/examples/Associate; rm /TEMP/Out.log; rm -rf /opt/CA/AionBRE/examples/Associate/associate.bin; respawn associate2.app >> /TEMP/Out.log  2>&1;reexec associate >> /TEMP/Out.log 2>&1 ;cd associate.bin;./_associate >> /TEMP/Out.log 2>&1 "
+
+# Setup your execution command
+goToInstallDir="cd /opt/CA/AionBRE;"
+initializeEnvironment=". ./aion.sh;"
+goToTestExample="cd /opt/CA/AionBRE/examples/Associate;"
+deleteOldLogsAndTestFiles= "rm /TEMP/Out.log; rm -rf /opt/CA/AionBRE/examples/Associate/associate.bin;"
+respawnApp= "  respawn associate.app >> /TEMP/Out.log  2>&1;"
+reexecRun= "reexec associate >> /TEMP/Out.log 2>&1 ;"
+binaryRun= "cd associate.bin;./_associate >> /TEMP/Out.log 2>&1 "
+
+cmdTestRoutine=goToInstallDir + initializeEnvironment + goToTestExample + deleteOldLogsAndTestFiles + respawnApp + reexecRun + binaryRun
+
+#cmdTestRoutine="cd /opt/CA/AionBRE;. ./aion.sh;cd /opt/CA/AionBRE/examples/Associate; rm /TEMP/Out.log; rm -rf /opt/CA/AionBRE/examples/Associate/associate.bin; respawn associate2.app >> /TEMP/Out.log  2>&1;reexec associate >> /TEMP/Out.log 2>&1 ;cd associate.bin;./_associate >> /TEMP/Out.log 2>&1 "
+
+
+
 subprocess.call(cmdTestRoutine,shell=True)
 #subprocess.call("cd /opt/CA/AionBRE;pwd;ls -la;. ./aion.sh;cd /opt/CA/AionBRE/examples/Associate;respawn associate.app;reexec associate;pwd;date;",shell=True)
 
