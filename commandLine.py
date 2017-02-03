@@ -6,9 +6,15 @@ subprocess.call("ls -al >> mylogfile.log", shell=True)
 subprocess.call("date >> mylogfile.log", shell=True)
 subprocess.call("pwd >> mylogfile.log", shell=True)
 
-proc = subprocess.Popen(['tail', '-500', '/TEMP/mylogfile.log'], stdout=subprocess.PIPE)
+
+subprocess.run("pwd")
+subprocess.run(["ls", "-l"])  # doesn't capture output
+
+
+#proc = subprocess.Popen(['tail', '-500', '/TEMP/mylogfile.log'], stdout=subprocess.PIPE)
+proc = subprocess.Popen(['tail', '/TEMP/mylogfile.log'], stdout=subprocess.PIPE)
 for line in proc.stdout.readlines():
-    print line.rstrip()
+    print (line.rstrip())
 
 
 #if os.name == 'posix' and sys.version_info[0] < 3:
