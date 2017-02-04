@@ -1,12 +1,24 @@
 import subprocess
 ####import subprocess32 as subprocess
 
+
+# Testing command line to run QA
 #Windows Platform
-cmdTestRoutineWin="cd  C:\CA\AionBRE\examples\Associate && dir && respawn associate.app && echo last command"
+# Setup your execution command for Windows ( && - will not continue if there is error,  & - execute command even if previous on failed
+goToTestExample="cd  C:\CA\AionBRE\examples\Associate &&"
+deleteOldLogsAndTestFiles= "rmdir associate.bin /s /q  &  del Out.log & dir > Out.log &&"
+respawnApp= "  respawn associate.app >> Out.log  2>&1 "
+cmdTestRoutineWin= goToTestExample + deleteOldLogsAndTestFiles + respawnApp
 subprocess.call(cmdTestRoutineWin,shell=True)
+
+file = open('C:\CA\AionBRE\examples\Associate\Out.log', 'r')
+print file.read()
+
+
 exit()
 
-# Setup your execution command
+#Linuxr
+# Setup your execution command for Linux
 goToInstallDir="cd /opt/CA/AionBRE;"
 initializeEnvironment=". ./aion.sh;"
 goToTestExample="cd /opt/CA/AionBRE/examples/Associate;"
