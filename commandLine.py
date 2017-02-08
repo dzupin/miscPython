@@ -13,8 +13,6 @@ subprocess.call(cmdTestRoutineWin,shell=True)
 
 file = open('C:\CA\AionBRE\examples\Associate\Out.log', 'r')
 print file.read()
-
-
 exit()
 
 #Linuxr
@@ -33,14 +31,18 @@ cmdTestRoutine=goToInstallDir + initializeEnvironment + goToTestExample + delete
 #Run econcatenated execution commnand
 subprocess.call(cmdTestRoutine,shell=True)
 
-#Example how to open and parse log file using shell command tail on Linux (If possible, use Python build-in file processing instead)
+#Example how to open and parse log file using shell command tail on Linux (This is command-line output processing demo. If possible, use Python file open instead)
 proc = subprocess.Popen(['tail', '-2000','/TEMP/Out.log'], stdout=subprocess.PIPE)
 for line in proc.stdout.readlines():
     print (line.rstrip())
 
+#file = open('/TEMP/Out.log', 'r')
+#    print file.read()
 
 
-#Scratchpad AREA
+
+
+    #Scratchpad AREA
 #  import os
 #if os.name == 'posix' and sys.version_info[0] < 3:
 #    import subprocess32 as subprocess
