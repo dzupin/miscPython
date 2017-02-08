@@ -1,4 +1,9 @@
-import _winreg as wreg
+#For Python 2.7
+#import _winreg as wreg
+
+#For Python 3
+import winreg as wreg
+
 # Create new registry key with subkey and new value - Reenable next 3 lines when this code is run for the first time
 #key = wreg.CreateKey(wreg.HKEY_LOCAL_MACHINE, "Software\\TestCompany\\TestProject")
 #wreg.SetValue(key, 'NewSubkey', wreg.REG_SZ, 'testsubkey')
