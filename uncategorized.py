@@ -17,7 +17,7 @@ import pygame
 print("pygame version: %s" % pygame.__version__)
 
 ############################################################################################
-import  requests_cache
+#import  requests_cache
 import requests
 
 import dataset
