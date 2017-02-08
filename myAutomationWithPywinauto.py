@@ -1,6 +1,6 @@
 from pywinauto.application import Application
 
-app = Application().start("notepad.exe")
+app = Application().start("C:\\Windows\\Notepad.exe")
 
 app.UntitledNotepad.menu_select("Help->About Notepad")
 app.AboutNotepad.OK.click()
