@@ -6,7 +6,7 @@ import subprocess
 #Windows Platform
 # Setup your execution command for Windows ( && - will not continue if there is error,  & - execute command even if previous on failed
 goToTestExample="cd  C:\TEMP\examples\Associate &&"
-deleteOldLogsAndTestFiles= "rmdir associate.bin /s /q  &&  del Out.log && dir > Out.log &&"
+deleteOldLogsAndTestFiles= "rmdir associate.bin /s /q  &  del Out.log & dir > Out.log &&"
 respawnApp= "  respawn associate.app >> Out.log  2>&1 "
 cmdTestRoutineWin= goToTestExample + deleteOldLogsAndTestFiles + respawnApp
 subprocess.call(cmdTestRoutineWin,shell=True)
