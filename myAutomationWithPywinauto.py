@@ -21,7 +21,7 @@ cmdTestRoutineWin= goToTestExample + deleteOldLogsAndTestFiles + respawnApp
 subprocess.call(cmdTestRoutineWin,shell=True)
 
 file = open('C:\TEMP\examples\Associate\Out.log', 'r')
-print file.read()
+print (file.read())
 
 #from pywinauto.application import Desktop
 appAion = Application().start(r"C:\TEMP\examples\Associate\associate.bin\_associate.exe")
@@ -31,16 +31,16 @@ dlg = appAion['Title']
 dlg.print_control_identifiers()
 appAion[u'Title']['OK'].print_control_identifiers()
 print ("-------------------- **** -----------------------")
-print appAion[u'Title'].user_data()
+print (appAion[u'Title'].user_data())
 #print appAion[u'Title'].Texts()                #[u'Title']
 #print appAion[u'Title'].WindowText()           #Title
-print appAion[u'Title'].GetProperties()        #{u'is_enabled': True, u'is_visible': True, u'style': -1798831675, u'fonts': [<LOGFONTW 'Tahoma' -14>], u'client_rects': [<RECT L0, T0, R180, B132>], u'texts': [u'Title'], u'class_name': u'#32770', u'is_unicode': True, u'control_id': 0, u'user_data': 3847704, u'friendly_class_name': u'Dialog', u'control_count': 2, u'exstyle': 65793, u'context_help_id': 0, u'menu_items': [], u'rectangle': <RECT L908, T487, R1094, B649>}
+print (appAion[u'Title'].GetProperties())        #{u'is_enabled': True, u'is_visible': True, u'style': -1798831675, u'fonts': [<LOGFONTW 'Tahoma' -14>], u'client_rects': [<RECT L0, T0, R180, B132>], u'texts': [u'Title'], u'class_name': u'#32770', u'is_unicode': True, u'control_id': 0, u'user_data': 3847704, u'friendly_class_name': u'Dialog', u'control_count': 2, u'exstyle': 65793, u'context_help_id': 0, u'menu_items': [], u'rectangle': <RECT L908, T487, R1094, B649>}
 #print appAion[u'Title'].user_data()            #3257504
 #print appAion[u'Title'].Children()             #[<pywinauto.controls.win32_controls.ButtonWrapper object at 0x0000000006E6FA90>, <pywinauto.controls.win32_controls.StaticWrapper object at 0x0000000006E6FAC8>]
 #print appAion[u'Title'].debug_message("My debug 1")  # writes debug message over control (see in saved PIL image) <pywinauto.controls.win32_controls.DialogWrapper object at 0x0000000006E6D0F0>
 #print appAion[u'Title'].capture_as_image().save("screen_capture.png", "PNG")     #<PIL.Image.Image image mode=RGB size=186x162 at 0x6E72160>
 print ("*****")
-print appAion[u'Title'][u'Static'].Texts()                #[[u'Error: Dissolve failed']
+print (appAion[u'Title'][u'Static'].Texts())                #[[u'Error: Dissolve failed']
 print ("++++")
 #print appAion[u'Title']['OK'].Texts()             #[u'OK']
 #print appAion[u'Title']['OK'].WindowText()        #OK
@@ -50,21 +50,21 @@ print ("++++")
 #print appAion[u'Title']['OK'].debug_message("My debug 2")   # writes debug message over control (see in saved PIL image) <pywinauto.controls.win32_controls.ButtonWrapper object at 0x0000000006F0AC88>
 #print appAion[u'Title']['OK'].capture_as_image().save("screen_capture2.jpg", "JPEG")  #<PIL.Image.Image image mode=RGB size=100x30 at 0x6E722E8>
 print ("-------------------- **** -----------------------")
-print appAion[u'Title'][u'Static'].Texts()
+print (appAion[u'Title'][u'Static'].Texts())
 appAion[u'Title']['OK'].click()
-print appAion[u'Title'][u'Static'].Texts()
+print (appAion[u'Title'][u'Static'].Texts())
 appAion[u'Title']['OK'].click()
-print appAion[u'Title'][u'Static'].Texts()
+print (appAion[u'Title'][u'Static'].Texts())
 appAion[u'Title']['OK'].click()
-print appAion[u'Title'][u'Static'].Texts()
+print (appAion[u'Title'][u'Static'].Texts())
 appAion[u'Title']['OK'].click()
-print appAion[u'Title'][u'Static'].Texts()
+print (appAion[u'Title'][u'Static'].Texts())
 appAion[u'Title']['OK'].click()
-print appAion[u'Title'][u'Static'].Texts()
+print (appAion[u'Title'][u'Static'].Texts())
 appAion[u'Title']['OK'].click()
-print appAion[u'Title'][u'Static'].Texts()
+print (appAion[u'Title'][u'Static'].Texts())
 appAion[u'Title']['OK'].click()
-print appAion[u'Title'][u'Static'].Texts()
+print (appAion[u'Title'][u'Static'].Texts())
 appAion[u'Title']['OK'].debug_message("My debug")
 appAion[u'Title']['OK'].click()
 
