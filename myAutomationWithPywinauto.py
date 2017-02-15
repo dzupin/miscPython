@@ -30,6 +30,9 @@ print (file.read())
 try:
     #appAion = Application().start(r"C:\TEMP\examples\Associate\associate.bin\_associate.exe")
     appAion = Application().start(r"reexec C:\TEMP\examples\Associate\associate.app")
+    #Delay timer for applications that may be slower to initialize their GUI
+    while not appAion.Windows_():
+        time.sleep(.5)
 except Exception:
     print ("Generic exception: Application failed to start")
 except:
