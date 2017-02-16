@@ -3,25 +3,21 @@ from pywinauto.application import Application
 import subprocess
 import sys
 import time
-#NOTE: Python 2.7.13 fails import of pywinauto (http://pywinauto.github.io/)
-#library: Issue29294  ctypes.windll.LoadLibrary refuses unicode argument
-#Therefore use 2.7.12 (or Python 3) or wait for 2.7.14 (fix is in nightbuild) ( http://bugs.python.org/issue29294)
+from threading import Timer
 
-#Commented out Notepad sample demon. Uncomment it, in case you need to check functionality of the pywinauto library ####
-#app = Application().start("C:\\Windows\\Notepad.exe",timeout=1)
-#app.UntitledNotepad.menu_select("Help->About Notepad")
-#app.AboutNotepad.OK.click()
-##app.UntitledNotepad.Edit.type_keys("pywinauto Works!", with_spaces = True)
-#app.UntitledNotepad.type_keys("%FX")
-########################################################################################################################
 
+#Prereq
+#AionBRE installed, Aion examples directory located in C:\TEMP
 
 #Aion testing
 goToTestExample="cd  C:\TEMP\examples\Associate &&"
 deleteOldLogsAndTestFiles= "rmdir associate.bin /s /q  &  del Out.log & dir > Out.log &&"
-respawnApp= "  respawn associate.app >> Out.log  2>&1 "
+respawnApp= "respawn associate22.app >> Out.log  2>&1"
 cmdTestRoutineWin= goToTestExample + deleteOldLogsAndTestFiles + respawnApp
-subprocess.call(cmdTestRoutineWin,shell=True)
+
+subprocess.call(cmdTestRoutineWin, shell=True,timeout=3)
+
+
 
 file = open('C:\TEMP\examples\Associate\Out.log', 'r')
 print (file.read())
