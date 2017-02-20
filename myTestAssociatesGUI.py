@@ -3,6 +3,7 @@ from pywinauto.application import Application
 import subprocess
 import sys
 import time
+import os
 from threading import Timer
 
 '''Function definition and invocation for respawn.exe availability on the end user system.'''
@@ -70,6 +71,61 @@ checkAvailabilityOfReexec()
 testAppDirectory = "C:\TEMP\examples"
 testAppName = "Associate"
 
+def BuildAionApp(testAppName):
+    if not(os.path.isdir(testAppDirectory + "\\" + testAppName)):
+        print ("Failed to find test application directory")
+        print ("Exit code 3: The system cannot find the path specified.")
+        return (3)
+    if not(os.path.exists(testAppDirectory + "\\" + testAppName + "\\" + testAppName + ".app" )):
+        print ("Failed to find test application directory")
+        print ("Exit code 2: The system cannot find the file specified.")
+        return (2)
+    goToTestExample = "cd  " + testAppDirectory + "\\" + testAppName + " && "
+    deleteOldLogsAndTestFiles = "rmdir " + testAppName + ".bin /s /q  &  del " + testAppName + ".log & dir > " + testAppName + ".log && "
+    respawnApp = "respawn associate.app >> " + testAppName + ".log  2>&1"
+    print("In the next step I will run respawn in command line")
+    cmdTestRoutineWin = goToTestExample + deleteOldLogsAndTestFiles + respawnApp
+    print(cmdTestRoutineWin)
+
+    try:
+        subprocess.call(cmdTestRoutineWin, shell=True, timeout=3)
+    except Exception:
+        print("Fail to start your test application")
+        print("Because of Error when attempting to start test application this test run will be aborted ... ")
+        #   sys.exit(8)
+
+    # Check for specific Dialog box window that in this case indicate missing test file
+    try:
+        appCheckPoint = Application().Connect(title='Aion Build Utility')
+    except Exception:
+        print("Everything seems to be fine with respawn")
+
+    try:
+        appCheckPoint
+        if appCheckPoint.window(title='Aion Build Utility').Exists():
+            print("Aion Build Utility Error")
+            # If detected dialog exists it should be closed othewise it polute client desktop afte test exits
+            appCheckPoint['Dialog']['Button'].click()
+    except NameError:
+        print("Everything is fine with running respawn command")
+    except Exception:
+        print("Something else went wrong")
+    print("file open checkpoint")
+    print(testAppDirectory + "\\" + testAppName + ".log")
+    file = open(testAppDirectory + "\\" + testAppName + "\\" + testAppName + ".log", 'r')
+    print(file.read())
+
+    print("Finished building test application")
+    print (testAppName)
+
+
+
+#check if invalid app name is correctly handled
+BuildAionApp("Associate333")
+BuildAionApp("Associate")
+
+#Don't yet process the code below
+exit(777)
 goToTestExample="cd  "+ testAppDirectory +"\\" + testAppName +  " && "
 deleteOldLogsAndTestFiles= "rmdir " + testAppName + ".bin /s /q  &  del " + testAppName + ".log & dir > " + testAppName +".log && "
 respawnApp= "respawn associate.app >> " + testAppName + ".log  2>&1"
