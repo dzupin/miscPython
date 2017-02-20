@@ -6,6 +6,11 @@ import time
 import os
 from threading import Timer
 
+#Set-up default values
+testAppDirectory = "C:\TEMP\examples"
+testAppName = "Associate"
+
+
 '''Function definition and invocation for respawn.exe availability on the end user system.'''
 def checkAvailabilityOfRespawn():
     #INVOKE PROGRAM
@@ -58,18 +63,7 @@ def checkAvailabilityOfReexec():
         print("Return code 197: The operating system is not presently configured to run reexec application.")
         exit(197)
 
-#Prereq
-#AionBRE installed, Aion examples directory located in C:\TEMP
-#Step 1. Check correct functionality of  respawn.exe
-#Step 2. Check correct functionalituy of reexec.exe
 
-#Call respawn.exe functionality check
-checkAvailabilityOfRespawn()
-checkAvailabilityOfReexec()
-
-#Aion testing
-testAppDirectory = "C:\TEMP\examples"
-testAppName = "Associate"
 
 def BuildAionApp(testAppName):
     if not(os.path.isdir(testAppDirectory + "\\" + testAppName)):
@@ -118,11 +112,28 @@ def BuildAionApp(testAppName):
     print("Finished building test application")
     print (testAppName)
 
+#################################################   TESTING ############################################################
+#Prereq
+#AionBRE installed, Aion examples directory located in C:\TEMP
+#Step 1. Check correct functionality of  respawn.exe
+#Step 2. Check correct functionalituy of reexec.exe
+#Step 3. Build Aion Test Application
 
+#Step 1
+checkAvailabilityOfRespawn()
 
+#Step 2
+checkAvailabilityOfReexec()
+
+#Step 3
+BuildAionApp("Associate")
 #check if invalid app name is correctly handled
 BuildAionApp("Associate333")
 BuildAionApp("Associate")
+
+########################################################################################################################
+
+
 
 #Don't yet process the code below
 exit(777)
