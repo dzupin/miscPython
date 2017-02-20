@@ -5,8 +5,6 @@ import sys
 import time
 from threading import Timer
 
-
-
 '''Function definition and invocation for respawn.exe availability on the end user system.'''
 def checkAvailabilityOfRespawn():
     #INVOKE PROGRAM
@@ -33,15 +31,14 @@ def checkAvailabilityOfRespawn():
         print("Return code 197: The operating system is not presently configured to run respawn application.")
         exit(197)
 
-    '''Function definition and invocation for respawn.exe availability on the end user system.'''
-
+'''Function definition and invocation for reexec.exe availability on the end user system.'''
 def checkAvailabilityOfReexec():
     # INVOKE PROGRAM
     try:
          # Generate respawn dialog box and if successfull then report success in "exception" block
             # When AionBRE is correcly installed, respawn.exe is accessible from system path.
             # Set of Timeout is mandatory otherwise script will not process rest of the code. NOTE: Timeout not in Python 2.7
-            respawnCheckpoint = subprocess.call("reexec999.exe", shell=True, timeout=1)
+            respawnCheckpoint = subprocess.call("reexec.exe", shell=True, timeout=1)
     except Exception:
         print("Found reexec.exe ... ")
         # CLEAN-UP
@@ -60,9 +57,6 @@ def checkAvailabilityOfReexec():
         print("Return code 197: The operating system is not presently configured to run reexec application.")
         exit(197)
 
-
-
-
 #Prereq
 #AionBRE installed, Aion examples directory located in C:\TEMP
 #Step 1. Check correct functionality of  respawn.exe
@@ -72,16 +66,13 @@ def checkAvailabilityOfReexec():
 checkAvailabilityOfRespawn()
 checkAvailabilityOfReexec()
 
-
-
-
-
-
-exit (0)
 #Aion testing
-goToTestExample="cd  C:\TEMP\examples\Associate &&"
-deleteOldLogsAndTestFiles= "rmdir associate.bin /s /q  &  del Out.log & dir > Out.log &&"
-respawnApp= "respawn associate999.app >> Out.log  2>&1"
+testAppDirectory = "C:\TEMP\examples"
+testAppName = "Associate"
+
+goToTestExample="cd  "+ testAppDirectory +"\\" + testAppName +  " && "
+deleteOldLogsAndTestFiles= "rmdir " + testAppName + ".bin /s /q  &  del " + testAppName + ".log & dir > " + testAppName +".log && "
+respawnApp= "respawn associate.app >> " + testAppName + ".log  2>&1"
 print ("In the next step I will run respawn in command line")
 cmdTestRoutineWin= goToTestExample + deleteOldLogsAndTestFiles + respawnApp
 print (cmdTestRoutineWin)
@@ -109,13 +100,18 @@ except NameError:
     print ("Everything is fine with running respawn command")
 except Exception:
     print ("Something else went wrong")
-
-file = open('C:\TEMP\examples\Associate\Out.log', 'r')
+print ("file open checkpoint")
+print (testAppDirectory + "\\" + testAppName + ".log")
+file = open(testAppDirectory + "\\" + testAppName + "\\" + testAppName + ".log", 'r')
 print (file.read())
 
 
 print ("Show must go on")
 exit (88)
+
+
+
+
 
 #from pywinauto.application import Desktop
 try:
