@@ -17,8 +17,8 @@ def checkAvailabilityOfRespawn():
     try:
         #Generate respawn dialog box and if successfull then report success in "exception" block
         #When AionBRE is correcly installed, respawn.exe is accessible from system path.
-        #Set of Timeout is mandatory otherwise script will not process rest of the code. NOTE: Timeout not in Python 2.7
-        respawnCheckpoint = subprocess.call("respawn.exe", shell=True, timeout=2)
+        #Set of Timeout is mandatory otherwise script will not process rest of the code. NOTE: Timeout not available in Python 2.7
+        respawnCheckpoint = subprocess.call("respawn.exe", shell=True, timeout=1)
     except Exception:
         print("Found respawn.exe ... ")
     #CLEAN-UP
@@ -43,7 +43,7 @@ def checkAvailabilityOfReexec():
     try:
          # Generate respawn dialog box and if successfull then report success in "exception" block
             # When AionBRE is correcly installed, respawn.exe is accessible from system path.
-            # Set of Timeout is mandatory otherwise script will not process rest of the code. NOTE: Timeout not in Python 2.7
+            # Set of Timeout is mandatory otherwise script will not process rest of the code. NOTE: Timeout not available in Python 2.7
             respawnCheckpoint = subprocess.call("reexec.exe", shell=True, timeout=1)
     except Exception:
         print("Found reexec.exe ... ")
