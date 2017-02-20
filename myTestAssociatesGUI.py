@@ -6,21 +6,87 @@ import time
 from threading import Timer
 
 
+
+'''Function definition and invocation for respawn.exe availability on the end user system.'''
+def checkAvailabilityOfRespawn():
+    #INVOKE PROGRAM
+    try:
+        #Generate respawn dialog box and if successfull then report success in "exception" block
+        #When AionBRE is correcly installed, respawn.exe is accessible from system path.
+        #Set of Timeout is mandatory otherwise script will not process rest of the code. NOTE: Timeout not in Python 2.7
+        respawnCheckpoint = subprocess.call("respawn.exe", shell=True, timeout=1)
+    except Exception:
+        print("Found respawn.exe ... ")
+    #CLEAN-UP
+    #Respawn execution will automatically create dialog box. We need to close this no longer needed dialog box.
+    try:
+        #Check if connection to respawn.exe generated dialog box is possible
+        appCheckPoint = Application().Connect(title='Build Aion Application')
+        #Verified that respawn.exe generated dialog box exists and now that test is done I need to remove it (clean up).
+        if appCheckPoint.window(title='Build Aion Application').Exists():
+            appCheckPoint['Dialog']['Cancel'].click()
+        print("Aion Build Utility is available and functional")
+    #ERROR PROCESSING
+    except Exception:
+        #Something went wrong. Report problem (most likely repawn is not installed or not in system path)
+        print("respawn.exe (Aion Build Utility) is not available on targeted system.")
+        print("Return code 197: The operating system is not presently configured to run this application.")
+        exit(197)
+
+
 #Prereq
 #AionBRE installed, Aion examples directory located in C:\TEMP
+#Step 1. Check correct functionality of  respawn.exe
+#Step 2. Check correct functionalituy of reexec.exe
 
+#Call respawn.exe functionality check
+checkAvailabilityOfRespawn()
+
+
+
+
+
+
+
+exit (0)
 #Aion testing
 goToTestExample="cd  C:\TEMP\examples\Associate &&"
 deleteOldLogsAndTestFiles= "rmdir associate.bin /s /q  &  del Out.log & dir > Out.log &&"
-respawnApp= "respawn associate22.app >> Out.log  2>&1"
+respawnApp= "respawn associate999.app >> Out.log  2>&1"
+print ("In the next step I will run respawn in command line")
 cmdTestRoutineWin= goToTestExample + deleteOldLogsAndTestFiles + respawnApp
+print (cmdTestRoutineWin)
 
-subprocess.call(cmdTestRoutineWin, shell=True,timeout=3)
+try:
+    subprocess.call(cmdTestRoutineWin, shell=True,timeout=3)
+except Exception:
+    print("Fail to start your test application")
+    print ("Because of Error when attempting to start test application this test run will be aborted ... ")
+ #   sys.exit(8)
 
+#Check for specific Dialog box window that in this case indicate missing test file
+try:
+    appCheckPoint = Application().Connect(title='Aion Build Utility')
+except Exception:
+    print ("Everything seems to be fine with respawn")
 
+try:
+    appCheckPoint
+    if appCheckPoint.window(title='Aion Build Utility').Exists():
+        print("Aion Build Utility Error")
+        #If detected dialog exists it should be closed othewise it polute client desktop afte test exits
+        appCheckPoint['Dialog']['Button'].click()
+except NameError:
+    print ("Everything is fine with running respawn command")
+except Exception:
+    print ("Something else went wrong")
 
 file = open('C:\TEMP\examples\Associate\Out.log', 'r')
 print (file.read())
+
+
+print ("Show must go on")
+exit (88)
 
 #from pywinauto.application import Desktop
 try:
@@ -47,7 +113,7 @@ if appAion.window(title = "Aion Init").Exists():
     print(appAion['Dialog']['Button'].Texts())
     print(appAion['Dialog'].capture_as_image().save("screen_capture_InitError.png", "PNG"))
     appAion['Dialog']['Button'].click()
-    print("Because test app is not available we should exit the test")
+    print("Because Aion respawn is not available we should exit the test")
     sys.exit()
 
 
