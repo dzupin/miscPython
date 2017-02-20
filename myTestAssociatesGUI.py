@@ -30,8 +30,37 @@ def checkAvailabilityOfRespawn():
     except Exception:
         #Something went wrong. Report problem (most likely repawn is not installed or not in system path)
         print("respawn.exe (Aion Build Utility) is not available on targeted system.")
-        print("Return code 197: The operating system is not presently configured to run this application.")
+        print("Return code 197: The operating system is not presently configured to run respawn application.")
         exit(197)
+
+    '''Function definition and invocation for respawn.exe availability on the end user system.'''
+
+def checkAvailabilityOfReexec():
+    # INVOKE PROGRAM
+    try:
+         # Generate respawn dialog box and if successfull then report success in "exception" block
+            # When AionBRE is correcly installed, respawn.exe is accessible from system path.
+            # Set of Timeout is mandatory otherwise script will not process rest of the code. NOTE: Timeout not in Python 2.7
+            respawnCheckpoint = subprocess.call("reexec999.exe", shell=True, timeout=1)
+    except Exception:
+        print("Found reexec.exe ... ")
+        # CLEAN-UP
+        # Reexec execution will automatically create dialog box. We need to close this no longer needed dialog box.
+    try:
+        # Check if connection to respawn.exe generated dialog box is possible
+        appCheckPoint = Application().Connect(title='Run Aion Application')
+        # Verified that reexec.exe generated dialog box exists and now that test is done I need to remove it (clean up).
+        if appCheckPoint.window(title='Run Aion Application').Exists():
+            appCheckPoint['Dialog']['Cancel'].click()
+        print("Run Aion Application is available and functional")
+    # ERROR PROCESSING
+    except Exception:
+        # Something went wrong. Report problem (most likely repawn is not installed or not in system path)
+        print("reexec.exe (Run Aion Application) is not available on targeted system.")
+        print("Return code 197: The operating system is not presently configured to run reexec application.")
+        exit(197)
+
+
 
 
 #Prereq
@@ -41,7 +70,7 @@ def checkAvailabilityOfRespawn():
 
 #Call respawn.exe functionality check
 checkAvailabilityOfRespawn()
-
+checkAvailabilityOfReexec()
 
 
 
