@@ -12,7 +12,7 @@ cmdTestRoutineWin= goToTestExample + deleteOldLogsAndTestFiles + respawnApp
 subprocess.call(cmdTestRoutineWin,shell=True)
 
 file = open('C:\TEMP\examples\Associate\Out.log', 'r')
-print file.read()
+print (file.read())
 exit()
 
 #Linuxr
