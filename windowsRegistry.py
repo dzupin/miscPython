@@ -1,8 +1,9 @@
-#For Python 2.7
-import _winreg as wreg
+import sys     # Used to retrieve Python version number (to select between Python2 or Python3 specific code)
 
-#For Python 3
-#import winreg as wreg
+if sys.version_info[0] < 3:
+    import _winreg as wreg  #For Python 2.x
+else:
+    import winreg as wreg  # For Python 3.X
 
 # Create new registry key with subkey and new value - Reenable next 3 lines when this code is run for the first time
 #key = wreg.CreateKey(wreg.HKEY_LOCAL_MACHINE, "Software\\TestCompany\\TestProject")
